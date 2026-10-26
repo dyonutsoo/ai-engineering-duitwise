@@ -1,35 +1,34 @@
-# ScholarGuide MY — AI Scholarship Information Assistant
+# DuitWise MY — AI Personal Finance Information Assistant
 
-> Answers Malaysian students' questions about scholarship eligibility, requirements and application steps, grounded in official sponsor documents (JPA, MARA, Yayasan Khazanah) with source citations.
+> Answers young Malaysians' questions about income tax reliefs, EPF (KWSP) accounts and budgeting in plain language, grounded in official LHDN, KWSP and AKPK documents with source citations — information only, no investment advice.
 
 ## Problem Statement
-Malaysian school leavers and undergraduates struggle to find out which scholarships they qualify for, because eligibility rules, income caps, bonding conditions and deadlines are scattered across many separate official sources that change every year. Their questions combine several conditions and need rules from more than one document, which keyword search and fixed filters cannot handle well. A retrieval-augmented AI assistant can answer these natural-language questions from the official documents and cite its source.
+Many young working Malaysians do not understand which tax reliefs they can claim, how their EPF accounts and withdrawals work, or how to budget and manage debt. The official rules are spread across separate agency websites, written in technical language and updated every year, so people miss reliefs, withdraw savings without understanding the cost, and keep little emergency money. A retrieval-augmented AI assistant can answer their questions in their own words from the official documents and cite the source and year, which keyword search and static FAQs cannot do.
 
 ## Evidence of the Problem
-- Almost 40% of 2,200+ prospective students surveyed reported difficulty finding scholarship and funding information — QS TopUniversities (2014), *Students Online: Global Trends Report 2014*, https://www.topuniversities.com/publications/students-online-global-trends-report-2014
-- Most students hear about scholarships informally, many institutions have no formal channel for scholarship information, and confusing terms cause students to miss awards — Kumar & Bhandari (2025), *Why many marginalised students can't access scholarships*, India Development Review, https://idronline.org/article/education/why-many-marginalised-students-cant-access-scholarships/
+- 61% of Malaysians would have difficulty coming up with RM1,000 in an emergency (BNM Financial Capability and Inclusion Survey) — Malay Mail (2024, Nov 17), https://www.malaymail.com/news/money/2024/11/17/malaysians-financial-literacy-surpasses-global-average-but-61pc-still-lack-emergency-savings-says-bnm-deputy-governor/157181
+- Only about 36% of active EPF members aged 18–55 had reached their Basic Savings level as at October 2024 — New Straits Times (2024, Dec), https://www.nst.com.my/business/corporate/2024/12/1147217/epf-only-36pct-members-meet-current-basic-savings-benchmark
 
 ## Initial Related Work / Existing Approaches
-- **Official sponsor portals** (JPA, MARA, Yayasan Khazanah) — https://www.jpa.gov.my — authoritative, but fragmented across sponsors and formats; no way to ask one question across all of them.
-- **Scholarship aggregators** (Unienrol, Afterschool.my) — https://unienrol.com/scholarships — good listings, but browse/search only, summarised by third parties, and can be out of date.
-- **RAG university admission chatbot** — Chen et al. (2024), *Educational Technology & Society, 27*(4), 454–470, https://doi.org/10.30191/ETS.202410_27(4).TP02 — RAG raised accuracy from 41.4% (plain ChatGPT 3.5) to 89.5%, but covers admissions not scholarships, non-Malaysian data, and only 53 test users.
+- **Official agency portals** (LHDN, KWSP, AKPK) — https://www.hasil.gov.my/en/individu/pelepasan-cukai/ — authoritative, but fragmented across agencies, technical, and organised by year; no single place to ask a plain-language question.
+- **Comparison sites** (RinggitPlus, iMoney) — https://ringgitplus.com — useful articles and calculators, but product-focused with commercial incentives, and not tailored to the user's question.
+- **FinanceBench** — Islam et al. (2023), arXiv:2311.11944, https://arxiv.org/abs/2311.11944 — GPT-4-Turbo with retrieval answered incorrectly or refused 81% of sampled financial questions, showing general LLMs are unreliable for finance; but it covers company filings, not Malaysian personal finance.
 
 ## Engineering Gap / Limitation
-No existing tool lets Malaysian students ask natural-language eligibility questions across multiple official scholarship sources and get a grounded, cited answer that reflects the current intake. Portals are fragmented, aggregators are browse-only, and general-purpose chatbots may invent requirements or deadlines.
+No existing tool lets Malaysians ask plain-language questions about their own tax reliefs, EPF accounts and budgeting across official sources at once, and get a grounded answer that cites the current document and year. Portals are fragmented, comparison sites are product-focused, and general chatbots may state wrong amounts or outdated rules.
 
 ## Project Objectives
-- O1: To design a document-grounded scholarship information assistant based on public official Malaysian scholarship documents.
-- O2: To develop the assistant using retrieval-augmented generation with source citations and guardrails for outdated information and out-of-scope requests.
-- O3: To evaluate the assistant on answer accuracy, groundedness, latency and safety using a test set of student-style questions.
+- O1: To design a document-grounded personal finance information assistant based on public official documents from LHDN, KWSP and AKPK.
+- O2: To develop the assistant using retrieval-augmented generation with source and year citations, and guardrails that refuse investment advice and flag possibly outdated rules.
+- O3: To evaluate the assistant on answer accuracy, groundedness, latency and correct refusal of advice-seeking questions, using a test set of realistic user questions.
 
 ## Target Users
-Malaysian SPM / STPM / matriculation / foundation leavers and first-year undergraduates looking for first-degree scholarships; secondarily, school counsellors and student-affairs staff.
+Young working adults in Malaysia (about 20–35), such as fresh graduates and first-time taxpayers; secondarily, university students preparing to enter the workforce.
 
 ## Data Sources
-- JPA scholarship notices and application guides — https://www.jpa.gov.my
-- MARA education sponsorship information — https://www.mara.gov.my/sektor-pendidikan-lp/
-- Yayasan Khazanah scholarship programmes — https://www.yayasankhazanah.com.my/scholarship-programmes
-- PTPTN education loan information (optional, for comparison) — https://www.ptptn.gov.my
+- LHDN individual tax reliefs by year of assessment — https://www.hasil.gov.my/en/individu/pelepasan-cukai/
+- KWSP account restructuring guide and FAQ — https://www.kwsp.gov.my/en/member/account-centre/account-restructuring
+- AKPK financial education (budgeting and debt management) — https://www.akpk.org.my/financial-education
 
 > Source documents are used locally for coursework only and are not committed to this repository.
 

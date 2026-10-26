@@ -2,77 +2,77 @@
 
 | Field | Details |
 |-------|---------|
-| **Project Name** | ScholarGuide MY — AI Scholarship Information Assistant |
-| **Domain** | Higher Education / Student Financial Aid (Malaysia) |
+| **Project Name** | DuitWise MY — AI Personal Finance Information Assistant |
+| **Domain** | Personal Finance / Financial Literacy (Malaysia) |
 
 ## Problem Statement
 
-Malaysian school leavers and undergraduates find it hard to work out which scholarships they are eligible for, what the requirements are, and when to apply. The information is spread across many separate official sources (JPA, MARA, Yayasan Khazanah, PTPTN and others), each with its own eligibility rules, income caps, bonding conditions and application windows that change every year. Students therefore miss deadlines or skip scholarships they could have qualified for.
+Many young working Malaysians do not understand the basic money rules that affect them every year: which **income tax reliefs** they can claim, how their **EPF (KWSP) accounts** work and when they can withdraw, and how to **budget and manage debt**. The official information exists, but it is spread across separate agency websites (LHDN, KWSP, AKPK), written in formal or technical language, and updated every year (for example new tax reliefs each year of assessment, and the 2024 EPF account restructuring). As a result, people miss reliefs they are entitled to, make withdrawals without understanding the long-term cost, and have little emergency savings.
 
-A keyword search or a fixed rule-based filter is not enough: students ask questions in natural language that mix conditions ("I got 7A in SPM, my family earns RM6,000, can I apply for JPA to study engineering overseas?"), and the answer has to combine rules from several documents. AI engineering makes it possible to build a **document-grounded question-answering assistant (RAG)** that answers these questions from official scholarship documents and cites the source, instead of guessing.
+A keyword search or FAQ page is not enough, because people ask questions in their own words and the answer often depends on their situation ("I'm 26, I bought a laptop and paid for my mum's medical check-up, what can I claim?"). AI engineering makes it possible to build a **document-grounded question-answering assistant (RAG)** that explains these rules in plain language from official documents and cites the source and year. The assistant gives **information only**: it does not recommend investments or financial products, and it does not make decisions for the user.
 
 ## Evidence of the Problem
 
-- **Evidence 1:** In a global survey of more than 2,200 prospective international students, almost 40% said they had difficulty finding information about scholarships and funding.
-  **Source / citation:** QS TopUniversities (2014). *Students Online: Global Trends Report 2014*. https://www.topuniversities.com/publications/students-online-global-trends-report-2014
-- **Evidence 2:** A 2023 survey of 102 scholarship recipients found most students hear about scholarships informally (teachers, friends, community), many institutions have no formal channel for sharing scholarship information, and confusing terms and document errors cause students to miss awards.
-  **Source / citation:** Kumar, R., & Bhandari, S. (2025, June 6). *Why many marginalised students can't access scholarships*. India Development Review. https://idronline.org/article/education/why-many-marginalised-students-cant-access-scholarships/
+- **Evidence 1:** Bank Negara Malaysia's Financial Capability and Inclusion Survey found that 61% of Malaysians would have difficulty coming up with RM1,000 in an emergency, and BNM has urged making financial education mandatory for tertiary students.
+  **Source / citation:** Malay Mail. (2024, November 17). *Malaysians' financial literacy surpasses global average but 61pc still lack emergency savings, says BNM deputy governor*. https://www.malaymail.com/news/money/2024/11/17/malaysians-financial-literacy-surpasses-global-average-but-61pc-still-lack-emergency-savings-says-bnm-deputy-governor/157181
+- **Evidence 2:** Only about 36% of active EPF members aged 18–55 had reached their age-based Basic Savings level as at October 2024.
+  **Source / citation:** New Straits Times. (2024, December). *EPF: Only 36pct members meet current basic savings benchmark*. https://www.nst.com.my/business/corporate/2024/12/1147217/epf-only-36pct-members-meet-current-basic-savings-benchmark
 
-> Note: Both sources are from outside Malaysia. In Week 2, add at least one Malaysia-specific source (e.g. a local study on scholarship awareness, or a short survey of classmates) to strengthen the local evidence.
+> Note: Both figures are reported by news outlets quoting BNM and EPF/Ministry of Finance. In Week 2, link the original BNM survey report or EPF release where available.
 
 ## Initial Related Work
 
-- **Study / solution 1:** Official sponsor portals (JPA Penajaan / eSILA, MARA Pendidikan, Yayasan Khazanah scholarship pages)
-  **Source / citation:** https://www.jpa.gov.my ; https://www.mara.gov.my/sektor-pendidikan-lp/ ; https://www.yayasankhazanah.com.my/scholarship-programmes
-  **Key limitation:** Authoritative, but each sponsor publishes separately and in different formats (web pages, PDF notices, Bahasa Melayu and English). Students must read several documents to compare options; there is no way to ask a question across all of them.
+- **Study / solution 1:** Official agency portals and tools — LHDN tax relief pages and e-Filing, KWSP i-Akaun and member guides, AKPK financial education modules
+  **Source / citation:** https://www.hasil.gov.my/en/individu/pelepasan-cukai/ ; https://www.kwsp.gov.my/en/member/account-centre/account-restructuring ; https://www.akpk.org.my/financial-education
+  **Key limitation:** Authoritative, but each agency publishes separately, often as long PDFs or tables organised by year. Users must already know what to look for, and there is no way to ask one plain-language question across tax, EPF and budgeting at once.
 
-- **Study / solution 2:** Scholarship aggregator websites (e.g. Unienrol, Afterschool.my)
-  **Source / citation:** https://unienrol.com/scholarships ; https://afterschool.my/scholarships
-  **Key limitation:** Useful listings and filters, but they are search/browse tools, not question answering. Eligibility details are summarised by third parties and can go out of date (application windows change every year), and the student still has to interpret the rules themselves.
+- **Study / solution 2:** Commercial personal finance comparison sites (e.g. RinggitPlus, iMoney)
+  **Source / citation:** https://ringgitplus.com ; https://www.imoney.my
+  **Key limitation:** Helpful articles and calculators, but they focus on comparing and selling financial products (credit cards, loans) and may have commercial incentives. Articles are written for general readers, not answered for the user's question, and can go out of date when rules change.
 
-- **Study / solution 3:** RAG-based university admission chatbot
-  **Source / citation:** Chen, Z., Zou, D., Xie, H., Lou, H., & Pang, Z. (2024). Facilitating university admission using a chatbot based on large language models with retrieval-augmented generation. *Educational Technology & Society, 27*(4), 454–470. https://doi.org/10.30191/ETS.202410_27(4).TP02
-  **Key limitation:** Shows RAG raises answer accuracy from 41.4% (plain ChatGPT 3.5) to 89.5%, but it targets admissions, not scholarships, uses university data from the US, Kenya and Hong Kong (not Malaysian sponsors), and was tested with a small user group (53 students). It also shows that a general-purpose chatbot alone is unreliable for this kind of question.
+- **Study / solution 3:** FinanceBench — benchmark for LLM financial question answering
+  **Source / citation:** Islam, P., Kannappan, A., Kiela, D., Qian, R., Scherrer, N., & Vidgen, B. (2023). *FinanceBench: A new benchmark for financial question answering*. arXiv:2311.11944. https://arxiv.org/abs/2311.11944
+  **Key limitation:** Shows that even GPT-4-Turbo with a retrieval system answered incorrectly or refused 81% of sampled financial questions, so a general-purpose LLM cannot be trusted with finance facts without careful grounding and evaluation. However, it covers company financial filings, not personal finance rules for individuals, and not Malaysian sources.
 
 ## Engineering Gap / Limitation
 
-**Gap / Limitation:** No existing tool lets Malaysian students ask natural-language eligibility questions **across multiple official scholarship sources at once** and get an answer that is grounded in, and cites, the current official document. Official portals are fragmented, aggregators are browse-only and can be outdated, and general-purpose AI assistants are not grounded in official sponsor documents and may invent requirements or deadlines.
+**Gap / Limitation:** No existing tool lets Malaysians ask plain-language questions about their own tax reliefs, EPF accounts and budgeting **across official sources at once** and get an answer that is grounded in, and cites, the current official document and year. Official portals are fragmented and technical, comparison sites are product-focused, and general-purpose chatbots are not reliably grounded in Malaysian rules and may state wrong amounts or outdated reliefs (as FinanceBench shows for financial QA in general).
 
 ## Initial Project Objectives
 
-- **O1:** To design a document-grounded scholarship information assistant based on publicly available official scholarship documents from Malaysian sponsors.
-- **O2:** To develop the assistant using retrieval-augmented generation with source citations and guardrails that flag out-of-date information and refuse to make final eligibility decisions.
-- **O3:** To evaluate the assistant in terms of answer accuracy, groundedness (citation correctness), latency, and safe handling of out-of-scope questions, using a test set of real student-style questions.
+- **O1:** To design a document-grounded personal finance information assistant based on publicly available official documents from LHDN, KWSP and AKPK.
+- **O2:** To develop the assistant using retrieval-augmented generation with source and year citations, and guardrails that refuse investment or product recommendations and flag possibly outdated rules.
+- **O3:** To evaluate the assistant on answer accuracy (amounts, limits, eligibility), groundedness (citation correctness), latency, and correct refusal of out-of-scope or advice-seeking questions, using a test set of realistic user questions.
 
 ## Target Users
 
-Malaysian SPM / STPM / matriculation / foundation leavers and first-year undergraduates who are looking for scholarships or sponsorship to fund their first degree. Secondary users: school counsellors and university student-affairs staff who answer scholarship questions.
+Young working adults in Malaysia (roughly 20–35 years old), such as fresh graduates and first-time taxpayers, who need to file income tax, understand their EPF savings and manage a monthly budget. Secondary users: university students preparing to enter the workforce.
 
 ## Data Sources
 
-- **Source 1:** JPA scholarship programme notices and application guides (Penajaan) — URL: https://www.jpa.gov.my (application portal: https://esilav2.jpa.gov.my)
-- **Source 2:** MARA education sponsorship information — URL: https://www.mara.gov.my/sektor-pendidikan-lp/
-- **Source 3:** Yayasan Khazanah scholarship programme pages (e.g. Khazanah Watan Scholarship) — URL: https://www.yayasankhazanah.com.my/scholarship-programmes
-- **Source 4 (optional):** PTPTN education loan information (for comparing scholarship vs. loan) — URL: https://www.ptptn.gov.my
+- **Source 1:** LHDN individual tax reliefs (by year of assessment) and the BE form explanatory notes — URL: https://www.hasil.gov.my/en/individu/pelepasan-cukai/
+- **Source 2:** KWSP account restructuring guide, FAQ and Akaun Fleksibel withdrawal guide — URL: https://www.kwsp.gov.my/en/member/account-centre/account-restructuring (FAQ PDF: https://www.kwsp.gov.my/documents/d/guest/account-restructuring-faq-en)
+- **Source 3:** AKPK financial education materials on budgeting and debt management — URL: https://www.akpk.org.my/financial-education
 
-> Documents will be downloaded for local course use only. Only the URLs and a data card are committed to the public repository, not the copyrighted documents themselves.
+> Documents will be downloaded for local course use only. Only the URLs and a data card are committed to the public repository, not the documents themselves.
 
 ## Similar to EduAdvisor
 
-- Document-grounded Q&A assistant using retrieval-augmented generation over official PDFs/web pages.
-- Same type of user (students) and same quality dimensions: accuracy, groundedness, latency, safety.
-- Uses source citations so users can verify answers in the official document.
+- Document-grounded Q&A assistant using retrieval-augmented generation over official PDFs and web pages.
+- Answers must cite the source document so users can check them.
+- Same core quality dimensions: accuracy, groundedness, latency and safety.
 
 ## Different from EduAdvisor
 
-- **Multiple organisations instead of one university:** documents come from several independent sponsors with different formats and rules, so retrieval must keep track of which sponsor each rule belongs to.
-- **Time-sensitive data:** application windows and requirements change every year, so the system must store the document year/intake and warn users about outdated information.
-- **Eligibility reasoning:** questions combine several conditions (grades, household income, field of study, citizenship/Bumiputera status), which is harder than looking up a single prerequisite.
-- **Bilingual content:** many official notices are in Bahasa Melayu, while users may ask in English (or vice versa).
+- **Different domain and users:** personal finance for young working adults instead of academic advising for students.
+- **Several government agencies instead of one university:** documents come from LHDN, KWSP and AKPK, each with its own format and rules, so the system must track which agency and which year each rule comes from.
+- **Numbers matter:** many answers involve exact amounts and limits (e.g. relief caps in RM, minimum withdrawal amounts), so a small error is a wrong answer. Evaluation must check numbers exactly, not just whether the text sounds right.
+- **Rules change every year:** tax reliefs change each year of assessment, and EPF accounts were restructured in 2024, so the system must store the document year and warn when information may be outdated.
+- **Stronger scope boundary:** the system must clearly refuse to give investment advice or recommend financial products, which EduAdvisor does not need to handle.
 
 ## Responsible AI Risks
 
-- **Risk 1 — Hallucination / outdated information:** The model invents a requirement or states last year's deadline as current → a student misses the real application window or does not apply for a scholarship they qualify for. *Control:* answer only from retrieved documents, always cite source and year, show "check the official portal" for dates.
-- **Risk 2 — Fairness:** Some scholarships have eligibility tied to income, region or Bumiputera status, and some sponsors have far more documents than others → the system may over-recommend well-documented scholarships, or explain eligibility poorly for certain groups (e.g. non-Bumiputera students, arts/humanities students). *Control:* test accuracy across user profiles and sponsors; present eligibility rules neutrally as stated by the sponsor.
-- **Risk 3 — Privacy:** Students may type personal details (IC number, family income, results slips) into the chat → sensitive personal data could be logged or exposed. *Control:* never ask for identifiers, warn users not to share them, and mask/avoid storing personal data in logs.
-- **Risk 4 — Over-reliance / decision authority:** A student treats the assistant's answer as a final eligibility decision → may not apply, or may submit an incomplete application. *Control:* the assistant gives information only and states that the sponsor makes the final decision.
+- **Risk 1 — Hallucination / wrong amounts:** The model states a wrong relief cap or an outdated rule → the user over-claims and faces a tax penalty, or under-claims and loses money. *Control:* answer only from retrieved documents, always cite source and year of assessment, and remind users to confirm on the official portal before filing.
+- **Risk 2 — Inappropriate financial advice:** A user asks "Should I withdraw my EPF to invest in crypto?" and the system gives a recommendation → the user may lose retirement savings. *Control:* scope guardrail that detects advice-seeking questions, explains the relevant rules neutrally, and refers the user to AKPK's free advisory service or a licensed adviser.
+- **Risk 3 — Privacy:** Users may type their IC number, salary, EPF balance or bank details into the chat → sensitive personal data could be logged or exposed. *Control:* never ask for identifiers, warn users not to share them, and avoid storing personal data in logs.
+- **Risk 4 — Fairness / accessibility:** Official documents are mainly in formal English and Bahasa Melayu → users with lower financial or language literacy may get answers they cannot understand. *Control:* plain-language answers, and testing answer quality in both English and Bahasa Melayu.

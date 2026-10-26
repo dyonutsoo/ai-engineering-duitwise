@@ -47,7 +47,14 @@ prompts/      system prompts and prompt versions
 - [Observation sheet — ChatGPT](docs/week1_observation_sheet.md) — Group 2 (Part A), with [evidence screenshots](docs/evidence/)
 - [Conceptual AI system map — ChatGPT](docs/week1_system_map.png) — Group 2 (Part B)
 
+## Week 2 Deliverables
+- [Requirements specification](docs/week2_requirements.md) — project framing, scope, FR, NFR, RAI
+- [Evaluation criteria](docs/week2_evaluation_criteria.md)
+- [V1 architecture diagram](docs/week2_architecture_v1.png) ([editable .drawio](docs/week2_architecture_v1.drawio))
+- [Architecture decisions & traceability](docs/week2_architecture_decisions.md)
+
 ## Weekly Progress
 | Week | Focus | Deliverable | Status |
 |------|-------|-------------|--------|
 | W1 | System map + project scope | README + docs | ✅ |
+| W2 | Requirements, evaluation criteria, V1 architecture | week2_* docs + architecture diagram | ✅ |
